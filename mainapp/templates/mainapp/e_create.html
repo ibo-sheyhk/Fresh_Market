@@ -1,0 +1,73 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+      
+{% block content  %} 
+<div class="row">
+    <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Employe Registratsion</h5>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+          {% csrf_token %}
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Company (disabled)</label>
+                  <input type="text" class="form-control" disabled="" placeholder="Company" value="Fresh market">
+                </div>
+              </div>
+            </div> 
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Full Name</label>
+                  {% render_field form.full_name type="text" class="form-control" placeholder="Enter your fullname" %}
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group"> 
+                  <label>Brith date</label>
+                  {% render_field form.birth_date type='date' class="form-control" %}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Address</label>
+                  {% render_field form.address type='text' class="form-control" placeholder="Home Address" %}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>City</label>
+                  {% render_field form.city type='text' class="form-control" placeholder="City" %}
+                </div> 
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Country</label>
+                  {% render_field form.country type='text' class="form-control" placeholder="Country"  %}
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Salary</label>
+                  {% render_field form.salary type="number" class="form-control" placeholder="Oylik" %}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary btn-round">Create Employee</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+</div>
+{% endblock  %}

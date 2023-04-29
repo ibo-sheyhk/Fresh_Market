@@ -1,0 +1,107 @@
+{% extends 'mainapp/base.html' %} 
+{% load static %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> employes list</h4>
+        {% if request.user.is_superuser or request.user.is_staff  %}
+          <div class="update ml-auto mr-auto">
+            <a href="{% url 'e-create' %}" type="submit" class="btn btn-primary btn-round">Create Employee</a>
+          </div>
+        {% endif %}
+        </div>
+        <div class="col-md-4">
+          <form method="POST">
+            {% csrf_token %} 
+              <div class="input-group no-border">
+                <input name="q" type="text" value="" class="form-control" placeholder="Search">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <button type="submit" class="nc-icon nc-zoom-split"></button>
+                  </div>
+                </div>
+              </div>
+          </form>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  User id
+                </th>
+                <th>
+                  Full name
+                </th>
+                <th>
+                  Birth date
+                </th>
+                <th>
+                  Country
+                </th>
+                <th>
+                  City
+                </th>
+                <th>
+                  Address
+                </th>
+                <th class="text-right">
+                  Salary
+                </th>
+                <th class="text-right">
+                  Final Salary 
+                </th>
+              </th>
+              {% if request.user.is_superuser or request.user.is_staff  %}
+              <th class="text-right">
+                Actions
+              </th>
+              {% endif %}
+              </thead>
+              <tbody>
+              {% for employee in employees %}
+                <tr>
+                  <td>
+                    {{ employee.id }}
+                  </td>
+                  <td>
+                    {{ employee.full_name }}
+                  </td>
+                  <td>
+                    {{ employee.birth_date }}
+                  </td>
+                  <td>
+                    {{ employee.country }}
+                  </td>
+                  <td>
+                    {{ employee.city }}
+                  </td>
+                  <td>
+                    {{ employee.address }}
+                  </td>
+                  <td class="text-right">
+                    ${{ employee.salary }}
+                  </td>
+                  <td class="text-right">
+                    ${{ employee.final_salary }}
+                  </td> 
+                  {% if request.user.is_superuser or request.user.is_staff  %}
+                  <td><a href="{% url 'e-update' employee.id %}" type="submit" class="btn btn-primary btn-round">Update</a></td>
+                  {% endif %}
+                  {% if request.user.is_superuser %}
+                  <td><a href="{% url 'e-delete' employee.id %}" type="submit" class="btn btn-danger btn-round">Delete</a></td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+      

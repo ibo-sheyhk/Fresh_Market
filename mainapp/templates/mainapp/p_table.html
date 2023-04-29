@@ -1,0 +1,65 @@
+{% extends 'mainapp/base.html' %} 
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Product list</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Title
+                </th>
+                <th>
+                  Create date
+                </th>
+                <th>
+                  End date
+                </th>
+                <th>
+                  Quantity
+                </th>
+                <th class="text-right">
+                  Price
+                </th>
+                <th class="text-right">
+                  Total price
+                </th>
+              </thead>
+              <tbody>
+              {% for product in products %}
+                <tr>
+                  <td>
+                    {{ product.title }}
+                  </td>
+                  <td>
+                    {{ product.created_date }}
+                  </td>
+                  <td>
+                    {{ product.end_date }}
+                  </td>
+                  <td>
+                    {{ product.quantity }}
+                  </td>
+                  <td class="text-right">
+                    ${{ product.price }}
+                  </td>
+                  <td class="text-right">
+                    ${{ product.total_amounts }}
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% comment %}  {% endcomment %}
+  </div>
+{% endblock %}

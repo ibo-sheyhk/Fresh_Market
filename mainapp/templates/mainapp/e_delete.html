@@ -1,0 +1,31 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+      
+{% block content  %} 
+<div class="row">
+    <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Employe Registratsion</h5>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="{% url 'e-delete' employee.id %}">
+          {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <h3>Are you should to delete</h3>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <a href="{% url 'e-table' %}" type="submit" class="btn btn-primary btn-round">No</a>
+                <button type="submit" class="btn btn-danger btn-round">Yes</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+</div>
+{% endblock  %}
